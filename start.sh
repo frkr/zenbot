@@ -8,12 +8,12 @@ function mongo_exit() {
   mongo --eval "db.getSiblingDB('admin').shutdownServer()"
 }
 function back() {
-  ./zenbot.sh backfill binance.$1-USDT --days 90
+  ./zenbot.sh backfill binance.$1-USDT --days 30
 }
 function sim() {
   ./zenbot.sh sim \
   binance.$2-USDT \
-  --days 90 \
+  --days 30 \
   --strategy $3 \
   --use_fee_asset BNB \
   --buy_pct $1 \
@@ -27,17 +27,29 @@ function sim() {
 function sim2() {
   ./zenbot.sh sim \
   binance.$2-USDT \
-  --days 90 \
+  --days 30 \
   --strategy $3 \
   --use_fee_asset BNB \
   --buy_pct $1 \
-  --currency_capital 1000 \
+  --currency_capital 2000 \
   --filename /data/db/$2-$1-$3.html --non_interactive
+
+}
+function sim21() {
+  ./zenbot.sh sim \
+  binance.$2-USDT \
+  --days 30 \
+  --strategy $3 \
+  --use_fee_asset BNB \
+  --currency_capital 100 \
+  --filename /data/db/100-$2-$1-$3.html --non_interactive
 
 }
 function sim3() {
     sim2 10 BTT $1
     sim2 10 BTC $1
+    sim21 99 BTT $1
+    sim21 99 BTC $1
 }
 function all() {
   sim3 bollinger
