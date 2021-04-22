@@ -36,8 +36,8 @@ function sim2() {
 
 }
 function sim3() {
-    sim2 BTT 10 $1
-    sim2 BTC 10 $1
+    sim2 10 BTT $1
+    sim2 10 BTC $1
 }
 function all() {
   sim3 bollinger
