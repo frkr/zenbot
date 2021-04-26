@@ -73,7 +73,7 @@ function all() {
   sim3 sar
   sim3 speed
   sim3 srsi_macd
-  sim3 stddev
+#  sim3 stddev // travou
   sim3 ta_ema
   sim3 ta_macd
   sim3 ta_macd_ext
