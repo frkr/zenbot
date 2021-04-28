@@ -8,7 +8,7 @@ function mongo_exit() {
   mongo --eval "db.getSiblingDB('admin').shutdownServer()"
 }
 function back() {
-  ./zenbot.sh backfill binance.$1-USDT --days 30
+  ./zenbot.sh backfill binance.$1-USDT --days 40
 }
 function sim() {
   ./zenbot.sh sim \
@@ -46,52 +46,79 @@ function sim21() {
 
 }
 function sim3() {
-    sim2 10 BTT $1
-    sim2 10 BTC $1
-    sim21 99 BTT $1
-    sim21 99 BTC $1
+  ./zenbot.sh sim \
+  binance.$2-USDT \
+  --days 40 \
+  --strategy $3 \
+  --use_fee_asset BNB \
+  --buy_pct $1 \
+  --profit_stop_enable_pct 10 \
+  --profit_stop_pct 4 \
+  --sell_stop_pct 4 \
+  --currency_capital 2000 \
+  --filename /data/db/n3-$2-$1-$3.html --non_interactive
+
+}
+function sim31() {
+  ./zenbot.sh sim \
+  binance.$2-USDT \
+  --days 40 \
+  --strategy $3 \
+  --use_fee_asset BNB \
+  --currency_capital 100 \
+  --profit_stop_enable_pct 10 \
+  --profit_stop_pct 4 \
+  --sell_stop_pct 4 \
+  --filename /data/db/n3-100-$2-$1-$3.html --non_interactive
+
+}
+function simTypes() {
+    sim3 10 BTT $1
+    sim3 10 BTC $1
+    sim31 99 BTT $1
+    sim31 99 BTC $1
 }
 function all() {
-  sim3 bollinger
-  sim3 cci_srsi
-  sim3 crossover_vwap
-  sim3 dema
-  sim3 ehlers_ft
-  sim3 ehlers_mama
-  sim3 ehlers_trend
-  sim3 ichimoku
-  sim3 ichimoku_score
-  sim3 kc
-  sim3 macd
-  sim3 momentum
-  sim3 multi
-  sim3 neural
-  sim3 noop
-  sim3 pivot
-  sim3 renko
-  sim3 rsi
-  sim3 sar
-  sim3 speed
-  sim3 srsi_macd
-#  sim3 stddev // travou
-  sim3 ta_ema
-  sim3 ta_macd
-  sim3 ta_macd_ext
-  sim3 ta_ppo
-  sim3 ta_srsi_bollinger
-  sim3 ta_stoch_bollinger
-  sim3 ta_trix
-  sim3 ta_ultosc
-  sim3 ti_bollinger
-  sim3 ti_hma
-  sim3 ti_stoch
-  sim3 ti_stoch_bollinger
-  sim3 trend_bollinger
-  sim3 trend_ema
-  sim3 trendline
-  sim3 trust_distrust
-  sim3 vpt
-  sim3 wavetrend
+  simTypes bollinger
+  simTypes cci_srsi
+  simTypes crossover_vwap
+  simTypes dema
+  simTypes ehlers_ft
+  simTypes ehlers_mama
+  simTypes ehlers_trend
+  simTypes ichimoku
+  simTypes ichimoku_score
+  simTypes kc
+  simTypes macd
+  simTypes momentum
+  simTypes multi
+  simTypes neural
+  simTypes noop
+  simTypes pivot
+  simTypes renko
+  simTypes rsi
+  simTypes sar
+  simTypes speed
+  simTypes srsi_macd
+# simTypes stddev // travou
+  simTypes ta_ema
+  simTypes ta_macd
+  simTypes ta_macd_ext
+  simTypes ta_ppo
+  simTypes ta_srsi_bollinger
+  simTypes ta_stoch_bollinger
+  simTypes ta_trix
+  simTypes ta_ultosc
+  simTypes ti_bollinger
+  simTypes ti_hma
+  simTypes ti_stoch
+  simTypes ti_stoch_bollinger
+  simTypes trend_bollinger
+  simTypes trend_ema
+  simTypes trendline
+  simTypes trust_distrust
+  simTypes vpt
+  simTypes wavetrend
 }
 function main() {
   mongo_start
