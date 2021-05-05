@@ -6,6 +6,10 @@ docker run --rm -v /mnt/c/w/mongodb:/data/db frkr/zenbot
 docker run -it --rm -v /mnt/c/w/mongodb:/data/db --entrypoint=/bin/bash frkr/zenbot
 ```
 
+```shell
+docker run --rm -v /mnt/c/w/mongodb:/data/db frkr/zenbot ls
+```
+
 # Opcoes --
 - buy_pct 10
 - period=15m

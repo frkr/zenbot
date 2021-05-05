@@ -17,5 +17,5 @@ RUN chmod +x /bin/zenbot
 
 COPY stop.sh .
 COPY README.md .
-COPY start.sh .
-CMD ./start.sh
+COPY sim.sh .
+CMD ./sim.sh
