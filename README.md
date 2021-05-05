@@ -7,7 +7,36 @@ docker run -it --rm -v /mnt/c/w/mongodb:/data/db --entrypoint=/bin/bash frkr/zen
 ```
 
 ```shell
-docker run --rm -v /mnt/c/w/mongodb:/data/db frkr/zenbot ls
+#docker run --rm -v /mnt/c/w/mongodb:/data/db frkr/zenbot ./start.sh trade \
+#-e ZENBOT_BINANCE_API_KEY= \
+#-e ZENBOT_BINANCE_SECRET= \
+#-e ZENBOT_MONGODB_HOST= \
+#2048
+#4096
+#8192
+
+docker run -d --rm --name mongodb \
+-v /mnt/c/w/mongodb:/data/db frkr/zenbot \
+./mongodb.sh
+
+
+docker run --rm --name btc \
+--link mongodb:mongodb \
+-e ZENBOT_MONGODB_HOST=mongodb \
+-e NODE_OPTIONS="--max-old-space-size=2048" \
+-p 17365:17365 \
+frkr/zenbot \
+./zenbot.sh trade \
+--paper binance.BTC-USDT \
+--strategy ti_stoch_bollinger \
+--use_fee_asset BNB \
+--buy_pct 10 \
+--profit_stop_enable_pct 10 \
+--profit_stop_pct 4 \
+--sell_stop_pct 4
+
+
+
 ```
 
 # Opcoes --
