@@ -35,6 +35,8 @@ frkr/zenbot \
 --profit_stop_pct 4 \
 --sell_stop_pct 4
 
+docker run --rm --name btc -e ZENBOT_BINANCE_API_KEY=api -e ZENBOT_BINANCE_SECRET=secret -e NODE_OPTIONS="--max-old-space-size=2048" -p 17365:17365 frkr/zenbot ./zenbot.sh trade --paper binance.BTC-USDT --strategy ti_stoch_bollinger --use_fee_asset BNB --buy_pct 10 --profit_stop_enable_pct 10 --profit_stop_pct 4 --sell_stop_pct 4
+
 
 
 ```
